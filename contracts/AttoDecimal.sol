@@ -3,11 +3,8 @@ pragma solidity ^0.6.12;
 
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 
-import "./TrySafeMath.sol";
-
 library AttoDecimal {
     using SafeMath for uint256;
-    using TrySafeMath for uint256;
 
     struct Instance {
         uint256 mantissa;
