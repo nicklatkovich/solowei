@@ -1,0 +1,31 @@
+{
+  "name": "solowei",
+  "version": "0.1.0",
+  "author": "NickLatkovich <nicklatkovich@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "clean": "rm -rf ./build && rm -rf ./types/truffle-contracts",
+    "compile": "yarn clean && truffle compile && typechain --target=truffle-v5 'build/contracts/*.json'",
+    "build": "rm -rf ./dist && rm -f tsconfig.tsbuildinfo && ttsc",
+    "test": "yarn build && NODE_APP_INSTANCE=test truffle test ./dist/test/index.js",
+    "coverage": "yarn build && rm -rf coverage && NODE_APP_INSTANCE=test truffle run coverage --file=./dist/test/index.js",
+    "lint": "solhint -f table ./contracts/**/*.sol"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@typechain/truffle-v5": "^4.0.1",
+    "@zerollup/ts-transform-paths": "^1.7.18",
+    "openzeppelin-solidity": "^3.2.0",
+    "prettier": "^2.1.1",
+    "prettier-plugin-solidity": "1.0.0-alpha.57",
+    "solhint": "^3.2.1",
+    "solhint-plugin-prettier": "^0.0.5",
+    "solidity-coverage": "^0.7.11",
+    "truffle": "^5.1.50",
+    "truffle-typings": "1.0.8",
+    "ttypescript": "^1.5.12",
+    "typechain": "2.0.0",
+    "typechain-target-truffle": "1.0.2",
+    "typescript": "^4.1.2"
+  }
+}

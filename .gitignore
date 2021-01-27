@@ -1,0 +1,7 @@
+/build/
+/dist/
+/node_modules/
+/types/truffle-contracts/
+/tsconfig.tsbuildinfo
+/coverage/
+/coverage.json
