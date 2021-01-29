@@ -1,3 +1,4 @@
 *
 !/contracts/*.sol
+!/dist/utils/**/*
 !/package.json

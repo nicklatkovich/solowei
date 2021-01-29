@@ -1,8 +1,10 @@
 {
   "name": "solowei",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "NickLatkovich <nicklatkovich@gmail.com>",
   "license": "MIT",
+  "main": "dist/utils/index.js",
+  "types": "dist/utils/index.d.ts",
   "scripts": {
     "clean": "rm -rf ./build && rm -rf ./types/truffle-contracts",
     "compile": "yarn clean && truffle compile && typechain --target=truffle-v5 'build/contracts/*.json'",
