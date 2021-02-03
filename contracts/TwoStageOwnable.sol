@@ -38,11 +38,14 @@ abstract contract TwoStageOwnable {
     }
 
     function _nominateNewOwner(address owner_) internal {
+        if (_nominatedOwner == owner_) return;
+        require(_owner != owner_, "Already owner");
         _nominatedOwner = owner_;
         emit OwnerNominated(owner_);
     }
 
     function _setOwner(address newOwner) internal {
+        if (_owner == newOwner) return;
         _owner = newOwner;
         _nominatedOwner = address(0);
         emit OwnerChanged(newOwner);

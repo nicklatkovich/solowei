@@ -27,24 +27,13 @@
     "rootDir": "./src",
     "baseUrl": ".",
     "outDir": "./dist",
-    "typeRoots": [
-      "./types"
-    ],
+    "typeRoots": ["./types"],
     "paths": {
-      "@contracts": [
-        "types/truffle-contracts/index"
-      ],
-      "@contracts/*": [
-        "types/truffle-contracts/*"
-      ],
+      "@contracts": ["types/truffle-contracts/index"],
+      "@contracts/*": ["types/truffle-contracts/*"],
+      "@utils": ["src/utils"],
+      "@test-utils": ["src/test/test.utils"]
     },
-    "plugins": [
-      {
-        "transform": "@zerollup/ts-transform-paths",
-        "exclude": [
-          "*"
-        ]
-      }
-    ]
+    "plugins": [{"transform": "@zerollup/ts-transform-paths", "exclude": ["*"]}]
   }
 }

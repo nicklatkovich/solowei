@@ -1,4 +1,5 @@
 *
 !/contracts/*.sol
 !/dist/utils/**/*
+!/types/truffle-contracts/**/*
 !/package.json
