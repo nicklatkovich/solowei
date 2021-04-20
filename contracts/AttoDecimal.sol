@@ -76,7 +76,7 @@ library AttoDecimal {
     }
 
     function div(Instance memory a, uint256 b) internal pure returns (Instance memory) {
-        return Instance({mantissa: a.mantissa.mul(ONE_MANTISSA).div(b)});
+        return Instance({mantissa: a.mantissa.div(b)});
     }
 
     function div(uint256 a, Instance memory b) internal pure returns (Instance memory) {
