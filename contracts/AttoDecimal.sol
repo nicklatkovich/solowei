@@ -1,11 +1,7 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.12;
-
-import "openzeppelin-solidity/contracts/math/SafeMath.sol";
+pragma solidity ^0.8.6;
 
 library AttoDecimal {
-    using SafeMath for uint256;
-
     struct Instance {
         uint256 mantissa;
     }
@@ -16,10 +12,10 @@ library AttoDecimal {
     uint256 internal constant ONE_TENTH_MANTISSA = ONE_MANTISSA / 10;
     uint256 internal constant HALF_MANTISSA = ONE_MANTISSA / 2;
     uint256 internal constant SQUARED_ONE_MANTISSA = ONE_MANTISSA * ONE_MANTISSA;
-    uint256 internal constant MAX_INTEGER = uint256(-1) / ONE_MANTISSA;
+    uint256 internal constant MAX_INTEGER = type(uint256).max / ONE_MANTISSA;
 
     function maximum() internal pure returns (Instance memory) {
-        return Instance({mantissa: uint256(-1)});
+        return Instance({mantissa: type(uint256).max});
     }
 
     function zero() internal pure returns (Instance memory) {
@@ -31,7 +27,7 @@ library AttoDecimal {
     }
 
     function convert(uint256 integer) internal pure returns (Instance memory) {
-        return Instance({mantissa: integer.mul(ONE_MANTISSA)});
+        return Instance({mantissa: integer * ONE_MANTISSA});
     }
 
     function compare(Instance memory a, Instance memory b) internal pure returns (int8) {
@@ -44,72 +40,72 @@ library AttoDecimal {
     }
 
     function add(Instance memory a, Instance memory b) internal pure returns (Instance memory) {
-        return Instance({mantissa: a.mantissa.add(b.mantissa)});
+        return Instance({mantissa: a.mantissa + b.mantissa});
     }
 
     function add(Instance memory a, uint256 b) internal pure returns (Instance memory) {
-        return Instance({mantissa: a.mantissa.add(b.mul(ONE_MANTISSA))});
+        return Instance({mantissa: a.mantissa + b * ONE_MANTISSA});
     }
 
     function sub(Instance memory a, Instance memory b) internal pure returns (Instance memory) {
-        return Instance({mantissa: a.mantissa.sub(b.mantissa)});
+        return Instance({mantissa: a.mantissa - b.mantissa});
     }
 
     function sub(Instance memory a, uint256 b) internal pure returns (Instance memory) {
-        return Instance({mantissa: a.mantissa.sub(b.mul(ONE_MANTISSA))});
+        return Instance({mantissa: a.mantissa - b * ONE_MANTISSA});
     }
 
     function sub(uint256 a, Instance memory b) internal pure returns (Instance memory) {
-        return Instance({mantissa: a.mul(ONE_MANTISSA).sub(b.mantissa)});
+        return Instance({mantissa: a * ONE_MANTISSA - b.mantissa});
     }
 
     function mul(Instance memory a, Instance memory b) internal pure returns (Instance memory) {
-        return Instance({mantissa: a.mantissa.mul(b.mantissa) / ONE_MANTISSA});
+        return Instance({mantissa: a.mantissa * b.mantissa / ONE_MANTISSA});
     }
 
     function mul(Instance memory a, uint256 b) internal pure returns (Instance memory) {
-        return Instance({mantissa: a.mantissa.mul(b)});
+        return Instance({mantissa: a.mantissa * b});
     }
 
     function div(Instance memory a, Instance memory b) internal pure returns (Instance memory) {
-        return Instance({mantissa: a.mantissa.mul(ONE_MANTISSA).div(b.mantissa)});
+        return Instance({mantissa: a.mantissa * ONE_MANTISSA / b.mantissa});
     }
 
     function div(Instance memory a, uint256 b) internal pure returns (Instance memory) {
-        return Instance({mantissa: a.mantissa.div(b)});
+        return Instance({mantissa: a.mantissa / b});
     }
 
     function div(uint256 a, Instance memory b) internal pure returns (Instance memory) {
-        return Instance({mantissa: a.mul(SQUARED_ONE_MANTISSA).div(b.mantissa)});
+        return Instance({mantissa: a * SQUARED_ONE_MANTISSA / b.mantissa});
     }
 
     function div(uint256 a, uint256 b) internal pure returns (Instance memory) {
-        return Instance({mantissa: a.mul(ONE_MANTISSA).div(b)});
+        return Instance({mantissa: a * ONE_MANTISSA / b});
     }
 
     function idiv(Instance memory a, Instance memory b) internal pure returns (uint256) {
-        return a.mantissa.div(b.mantissa);
+        return a.mantissa / b.mantissa;
     }
 
     function idiv(Instance memory a, uint256 b) internal pure returns (uint256) {
-        return a.mantissa.div(b.mul(ONE_MANTISSA));
+        return a.mantissa / (b * ONE_MANTISSA);
     }
 
     function idiv(uint256 a, Instance memory b) internal pure returns (uint256) {
-        return a.mul(ONE_MANTISSA).div(b.mantissa);
+        return a * ONE_MANTISSA / b.mantissa;
     }
 
     function mod(Instance memory a, Instance memory b) internal pure returns (Instance memory) {
-        return Instance({mantissa: a.mantissa.mod(b.mantissa)});
+        return Instance({mantissa: a.mantissa % b.mantissa});
     }
 
     function mod(Instance memory a, uint256 b) internal pure returns (Instance memory) {
-        return Instance({mantissa: a.mantissa.mod(b.mul(ONE_MANTISSA))});
+        return Instance({mantissa: a.mantissa % (b * ONE_MANTISSA)});
     }
 
     function mod(uint256 a, Instance memory b) internal pure returns (Instance memory) {
-        if (a > MAX_INTEGER) return Instance({mantissa: a.mod(b.mantissa).mul(ONE_MANTISSA) % b.mantissa});
-        return Instance({mantissa: a.mul(ONE_MANTISSA).mod(b.mantissa)});
+        if (a > MAX_INTEGER) return Instance({mantissa: a % b.mantissa * ONE_MANTISSA % b.mantissa});
+        return Instance({mantissa: a * ONE_MANTISSA % b.mantissa});
     }
 
     function floor(Instance memory a) internal pure returns (uint256) {

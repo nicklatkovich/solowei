@@ -4,7 +4,7 @@ module.exports = {
   },
   compilers: {
     solc: {
-      version: "0.6.12",
+      version: "0.8.6",
       docker: false,
       settings: { optimizer: { enabled: false, runs: 200 }, evmVersion: "constantinople" },
     },

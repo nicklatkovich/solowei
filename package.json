@@ -1,6 +1,6 @@
 {
   "name": "solowei",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "author": "NickLatkovich <nicklatkovich@gmail.com>",
   "license": "MIT",
   "main": "dist/utils/index.js",
@@ -17,7 +17,6 @@
   "devDependencies": {
     "@typechain/truffle-v5": "^4.0.1",
     "@zerollup/ts-transform-paths": "^1.7.18",
-    "openzeppelin-solidity": "^3.2.0",
     "prettier": "^2.1.1",
     "prettier-plugin-solidity": "1.0.0-alpha.57",
     "solhint": "^3.2.1",

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.12;
+pragma solidity ^0.8.6;
 pragma experimental ABIEncoderV2;
 
 import "../AttoDecimal.sol";

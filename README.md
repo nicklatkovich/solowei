@@ -11,7 +11,7 @@ import "solowei/contracts/{NAME_OF_CONTRACT_OR_LIBRARY}";
 
 Example of usage:
 ```ts
-pragma solidity ^0.6.12;
+pragma solidity ^0.8.6;
 
 import "solowei/contracts/AttoDecimal.sol";
 import "solowei/contracts/TwoStageOwnable.sol";

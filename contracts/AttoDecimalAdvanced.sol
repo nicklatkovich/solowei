@@ -1,10 +1,9 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.12;
+pragma solidity ^0.8.6;
 
 import "./AttoDecimal.sol";
 
 library AttoDecimalAdvanced {
-    using SafeMath for uint256;
     using AttoDecimal for AttoDecimal.Instance;
 
     enum RoundingMode {ROUND_UP, ROUND_DOWN, ROUND_HALF_UP, ROUND_HALF_DOWN}
@@ -22,7 +21,7 @@ library AttoDecimalAdvanced {
         AttoDecimal.Instance memory b,
         RoundingMode roundingMode
     ) internal pure returns (AttoDecimal.Instance memory) {
-        return _fromAttoMantissa(a.mantissa.mul(b.mantissa), roundingMode);
+        return _fromAttoMantissa(a.mantissa * b.mantissa, roundingMode);
     }
 
     function div(
@@ -30,12 +29,12 @@ library AttoDecimalAdvanced {
         AttoDecimal.Instance memory b,
         RoundingMode roundingMode
     ) internal pure returns (AttoDecimal.Instance memory) {
-        uint256 aAttoMantissa = a.mantissa.mul(AttoDecimal.ONE_MANTISSA);
+        uint256 aAttoMantissa = a.mantissa * AttoDecimal.ONE_MANTISSA;
         if (roundingMode == RoundingMode.ROUND_DOWN) {
-            return AttoDecimal.Instance({mantissa: aAttoMantissa.div(b.mantissa)});
+            return AttoDecimal.Instance({mantissa: aAttoMantissa / b.mantissa});
         }
         bool addition = false;
-        uint256 modulo = aAttoMantissa.mod(b.mantissa);
+        uint256 modulo = aAttoMantissa % b.mantissa;
         if (roundingMode == RoundingMode.ROUND_UP) addition = modulo > 0;
         else {
             uint256 half = b.mantissa / 2;
@@ -82,7 +81,7 @@ library AttoDecimalAdvanced {
         uint256 halfOfMinSignificantMantissa = minSignificantMantissa / 2;
         uint256 fractional = a.mantissa % minSignificantMantissa;
         bool addition = _calculateAddition(fractional, roundingMode, halfOfMinSignificantMantissa);
-        uint256 mantissa = (a.mantissa / minSignificantMantissa + (addition ? 1 : 0)).mul(minSignificantMantissa);
+        uint256 mantissa = (a.mantissa / minSignificantMantissa + (addition ? 1 : 0)) * minSignificantMantissa;
         return AttoDecimal.Instance(mantissa);
     }
 

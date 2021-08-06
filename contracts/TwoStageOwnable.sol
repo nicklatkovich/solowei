@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.12;
+pragma solidity ^0.8.6;
 
 abstract contract TwoStageOwnable {
     address private _nominatedOwner;
@@ -16,7 +16,7 @@ abstract contract TwoStageOwnable {
     event OwnerChanged(address indexed newOwner);
     event OwnerNominated(address indexed nominatedOwner);
 
-    constructor(address owner_) internal {
+    constructor(address owner_) {
         require(owner_ != address(0), "Owner is zero");
         _setOwner(owner_);
     }
