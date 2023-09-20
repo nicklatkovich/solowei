@@ -1,6 +1,6 @@
 # SOLOWEI
 
-A library for solidity smart contract development. It contrains helpers that are not added to openzeppelin, but can also be very useful.
+A library for solidity smart contract development. It contains helpers that are not added to openzeppelin, but can also be very useful.
 
 # Usage
 
@@ -56,7 +56,7 @@ contract Example is TwoStageOwnable {
 * [AttoDecimalAdvanced](#attodecimaladvanced)
 
 ## TrySafeMath
-Library to working with safe math. But instead of revert transaction it returns result as tuple of operation status (succeed or not) and answer. Most likely this will be implemented in openzepplin, but for now you may use this implementation.
+Library to working with safe math. But instead of revert transaction, it returns result as tuple of operation status (succeed or not) and answer. Most likely this will be implemented in openzepplin, but for now you may use this implementation.
 
 ## TwoStageOwnable
 Abstract contract similar to openzepplin's `Ownable` but with two step ownership transfering.
